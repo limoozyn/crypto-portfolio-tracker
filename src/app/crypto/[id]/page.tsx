@@ -2,21 +2,32 @@ import { Suspense } from 'react';
 import { getCryptoDetails } from '@/services/cryptoService';
 import CryptoDetailView from './CryptoDetailView';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-  searchParams?: Record<string, string | string[] | undefined>;
+// Use Next.js built-in types
+import { Metadata } from 'next';
+
+// Define params type
+type PageParams = {
+  id: string;
 }
 
-export async function generateMetadata({ params }: PageProps) {
+// Metadata generation
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: PageParams 
+}): Promise<Metadata> {
   const crypto = await getCryptoDetails(params.id);
   return {
     title: `${crypto.name} (${crypto.symbol.toUpperCase()}) - Details`,
   };
 }
 
-export default async function CryptoDetailPage({ params }: PageProps) {
+// Page component
+export default async function CryptoDetailPage({ 
+  params 
+}: { 
+  params: PageParams 
+}) {
   const cryptoData = await getCryptoDetails(params.id);
   
   return (

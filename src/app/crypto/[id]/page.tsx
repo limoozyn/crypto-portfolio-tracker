@@ -2,14 +2,20 @@ import { Suspense } from 'react';
 import { getCryptoDetails } from '@/services/cryptoService';
 import CryptoDetailView from './CryptoDetailView';
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export async function generateMetadata({ params }: PageProps) {
   const crypto = await getCryptoDetails(params.id);
   return {
     title: `${crypto.name} (${crypto.symbol.toUpperCase()}) - Details`,
   };
 }
 
-export default async function CryptoDetailPage({ params }: { params: { id: string } }) {
+export default async function CryptoDetailPage({ params }: PageProps) {
   const cryptoData = await getCryptoDetails(params.id);
   
   return (

@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-// Use base URL to avoid repeating it
 const api = axios.create({
   baseURL: 'https://api.coingecko.com/api/v3',
 });
 
-// Interface for cryptocurrency data
 export interface Cryptocurrency {
   id: string;
   symbol: string;
@@ -43,7 +41,6 @@ export interface CryptoDetail extends Cryptocurrency {
   };
 }
 
-// Get list of cryptocurrencies
 export const getTopCryptocurrencies = async (
   page = 1,
   perPage = 20,
@@ -67,7 +64,6 @@ export const getTopCryptocurrencies = async (
   }
 };
 
-// Get detailed info about a specific cryptocurrency
 export const getCryptoDetails = async (id: string): Promise<CryptoDetail> => {
   try {
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -89,7 +85,6 @@ export const getCryptoDetails = async (id: string): Promise<CryptoDetail> => {
   }
 };
 
-// Search for cryptocurrencies
 export const searchCryptocurrencies = async (query: string): Promise<{ coins: { id: string; name: string; symbol: string; market_cap_rank: number }[] }> => {
   try {
     const response = await api.get('/search', {

@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { CryptoDetail } from '../services/cryptoService';
 
-// Portfolio item with quantity
 export interface PortfolioItem {
   coin: CryptoDetail;
   quantity: number;
@@ -28,7 +27,6 @@ interface PortfolioContextType {
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
 
-// Helper reducer function
 const portfolioReducer = (state: PortfolioState, action: PortfolioAction): PortfolioState => {
   switch (action.type) {
     case 'ADD_COIN': {
@@ -74,7 +72,6 @@ const portfolioReducer = (state: PortfolioState, action: PortfolioAction): Portf
 };
 
 export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Initialize state from localStorage (if available)
   const [portfolio, dispatch] = useReducer(portfolioReducer, { items: [] }, () => {
     if (typeof window !== 'undefined') {
       const savedPortfolio = localStorage.getItem('cryptoPortfolio');
@@ -83,7 +80,6 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
     return { items: [] };
   });
   
-  // Save to localStorage when portfolio changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('cryptoPortfolio', JSON.stringify(portfolio));
@@ -115,7 +111,6 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
   );
 };
 
-// Custom hook for using the portfolio context
 export const usePortfolio = () => {
   const context = useContext(PortfolioContext);
   if (!context) {

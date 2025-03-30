@@ -19,21 +19,17 @@ export default function CryptoDetailView({ initialData }: CryptoDetailViewProps)
   
   const { portfolio, addCoin } = usePortfolio();
   
-  // Get crypto ID from the initial data
   const id = initialData.id;
   
-  // Fetch cryptocurrency details with client-side revalidation
   const { data: crypto = initialData } = useQuery({
     queryKey: ['cryptoDetail', id],
     queryFn: () => getCryptoDetails(id),
     initialData: initialData,
-    staleTime: 30000, // 30 seconds
+    staleTime: 30000,
   });
 
-  // Check if cryptocurrency is already in portfolio
   const isInPortfolio = portfolio.items.some(item => item.coin.id === id);
   
-  // Handle adding to portfolio
   const handleAddToPortfolio = () => {
     if (crypto && quantity > 0) {
       addCoin(crypto, quantity);
@@ -42,12 +38,10 @@ export default function CryptoDetailView({ initialData }: CryptoDetailViewProps)
     }
   };
   
-  // Calculate price change color
   const priceChangeColor = (crypto.price_change_percentage_24h || 0) >= 0
     ? 'text-green-600 dark:text-green-400'
     : 'text-red-600 dark:text-red-400';
   
-  // Format market cap with proper commas
   const formattedMarketCap = crypto.market_cap
     ? `$${crypto.market_cap.toLocaleString()}`
     : 'Not available';

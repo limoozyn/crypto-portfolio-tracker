@@ -1,17 +1,15 @@
 import { getTopCryptocurrencies, getCryptoDetails } from '@/services/cryptoService';
 
-// Create a mock module for axios
 jest.mock('axios', () => {
   const mockAxiosInstance = {
     get: jest.fn()
   };
   return {
     create: jest.fn(() => mockAxiosInstance),
-    mockAxiosInstance  // Expose the mock for tests to use
+    mockAxiosInstance
   };
 });
 
-// Import the mocked module to access the mock instance
 const { mockAxiosInstance } = jest.requireMock('axios') as {
   mockAxiosInstance: {
     get: jest.Mock;

@@ -1,16 +1,14 @@
-// src/app/__tests__/CryptoList.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import CryptoList from '@/app/CryptoList';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { CryptoDetail } from '@/services/cryptoService';
 
-// Mock components
 jest.mock('@/components/CryptoCard', () => {
-  return function MockCryptoCard({ crypto }: { crypto: any }) {
+  return function MockCryptoCard({ crypto }: { crypto: CryptoDetail }) {
     return <div data-testid={`crypto-card-${crypto.id}`}>{crypto.name}</div>;
   };
 });
 
-// Mock API
 jest.mock('@/services/cryptoService', () => ({
   getTopCryptocurrencies: jest.fn().mockResolvedValue([]),
 }));
@@ -88,7 +86,6 @@ describe('CryptoList', () => {
     const sortSelect = screen.getByRole('combobox');
     fireEvent.change(sortSelect, { target: { value: 'name' } });
 
-    // Check order - since we're mocking CryptoCard, we can check the DOM order
     const cryptoCards = screen.getAllByTestId(/crypto-card/);
     expect(cryptoCards[0].textContent).toBe('Bitcoin');
     expect(cryptoCards[1].textContent).toBe('Ethereum');

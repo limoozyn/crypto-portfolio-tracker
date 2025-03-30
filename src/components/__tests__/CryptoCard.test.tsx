@@ -1,14 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import CryptoCard from '@/components/CryptoCard';
 
-// Mock Next.js router
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
     push: jest.fn(),
   }),
 }));
 
-// Mock Next.js image
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {

@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { PortfolioProvider, usePortfolio } from '@/context/PortfolioContext';
 
-// Mock crypto data
 const mockCrypto = {
   id: 'bitcoin',
   description: {en: 'Bitcoin is a decentralized digital currency.'},
@@ -34,7 +33,6 @@ const mockCrypto = {
   }
 };
 
-// Create a test component that uses the portfolio context
 const TestComponent = () => {
   const { portfolio, addCoin, removeCoin, updateQuantity, getTotalValue } = usePortfolio();
 
@@ -51,7 +49,6 @@ const TestComponent = () => {
 
 describe('PortfolioContext', () => {
   beforeEach(() => {
-    // Clear localStorage before each test
     if (typeof window !== 'undefined') {
       window.localStorage.clear();
     }

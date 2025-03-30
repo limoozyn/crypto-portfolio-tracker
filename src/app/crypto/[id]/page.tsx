@@ -10,7 +10,6 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 export default async function CryptoDetailPage({ params }: { params: { id: string } }) {
-  // Fetch the data server-side
   const cryptoData = await getCryptoDetails(params.id);
   
   return (

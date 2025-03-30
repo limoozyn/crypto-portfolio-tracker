@@ -1,11 +1,8 @@
-// src/app/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Link from 'next/link';
 import ThemeProvider from '@/components/ThemeProvider';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
-import ThemeToggle from '@/components/ThemeToggle';
 import { PortfolioProvider } from '@/context/PortfolioContext';
 import MainNavigation from '@/components/MainNavigation';
 

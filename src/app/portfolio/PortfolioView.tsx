@@ -25,10 +25,8 @@ export default function PortfolioView() {
     setEditingId(null);
   };
   
-  // Total portfolio value
   const totalValue = getTotalValue();
   
-  // Calculate portfolio performance (simplified)
   const portfolioPerformance = portfolio.items.reduce((total, item) => {
     const change = item.coin.market_data.price_change_percentage_24h / 100;
     return total + (item.coin.market_data.current_price.usd * item.quantity * change);
@@ -42,7 +40,6 @@ export default function PortfolioView() {
     ? 'text-green-600 dark:text-green-400' 
     : 'text-red-600 dark:text-red-400';
   
-  // Empty state
   if (portfolio.items.length === 0) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center">

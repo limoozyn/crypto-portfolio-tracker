@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getTopCryptocurrencies, Cryptocurrency } from '@/services/cryptoService';
 import CryptoCard from '@/components/CryptoCard';
 
-// Custom sorting options
 type SortOption = 'rank' | 'name' | 'price' | 'priceChange';
 
 interface CryptoListProps {
@@ -17,7 +16,6 @@ export default function CryptoList({ initialCryptos }: CryptoListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('rank');
   const [page, setPage] = useState(1);
   
-  // Fetch data with React Query (client-side)
   const { data: cryptos = initialCryptos, isLoading, isError } = useQuery({
     queryKey: ['cryptocurrencies', page],
     queryFn: () => getTopCryptocurrencies(page, 20),
@@ -25,7 +23,6 @@ export default function CryptoList({ initialCryptos }: CryptoListProps) {
     placeholderData: (previousData) => previousData,
   });
 
-  // Function to handle sorting
   const sortCryptos = (cryptoList: Cryptocurrency[]) => {
     if (!cryptoList) return [];
     
@@ -44,7 +41,6 @@ export default function CryptoList({ initialCryptos }: CryptoListProps) {
     });
   };
   
-  // Function to filter cryptos by search term
   const filterCryptos = (cryptoList: Cryptocurrency[]) => {
     if (!cryptoList) return [];
     if (!searchTerm.trim()) return cryptoList;
@@ -57,15 +53,12 @@ export default function CryptoList({ initialCryptos }: CryptoListProps) {
     );
   };
   
-  // Get sorted and filtered crypto list
   const sortedAndFilteredCryptos = sortCryptos(filterCryptos(cryptos || []));
   
-  // Load more cryptos
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);
   };
   
-  // Don't show load more button when searching
   const showLoadMore = !searchTerm && sortedAndFilteredCryptos.length >= 20;
   
   return (

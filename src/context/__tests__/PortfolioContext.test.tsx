@@ -1,19 +1,36 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { PortfolioProvider, usePortfolio } from '@/context/PortfolioContext';
 
 // Mock crypto data
 const mockCrypto = {
   id: 'bitcoin',
+  description: {en: 'Bitcoin is a decentralized digital currency.'},
   symbol: 'btc',
   name: 'Bitcoin',
   image: 'https://example.com/bitcoin.png',
   market_cap: 1000000000000,
   market_cap_rank: 1,
   last_updated: '2023-01-01T00:00:00.000Z',
+  price_change_percentage_24h: 2.5,
+  current_price: 50000,
   market_data:{
+    ath: { usd: 1 },
+    atl: { usd: 2 },
+    circulating_supply: 3,
+    total_supply: 4,
+    max_supply: 5,
+    total_volume: { usd: 6 },
     price_change_percentage_24h: 2.5,
     current_price: {usd: 50000},
-    
+  },
+  links: {
+    homepage: ['http://example.com'],
+    blockchain_site: ['http://example.com'],
+    official_forum_url: ['http://example.com'],
+    chat_url: ['http://example.com'],
+    twitter_screen_name: 'identifier',
+    facebook_username: 'identifier',
+    telegram_channel_identifier: 'identifier'
   }
 };
 

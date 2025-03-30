@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { Cryptocurrency, CryptoDetail } from '../services/cryptoService';
+import { CryptoDetail } from '../services/cryptoService';
 
 // Portfolio item with quantity
 export interface PortfolioItem {
@@ -14,13 +14,13 @@ interface PortfolioState {
 }
 
 type PortfolioAction =
-  | { type: 'ADD_COIN'; payload: { coin: Cryptocurrency; quantity: number } }
+  | { type: 'ADD_COIN'; payload: { coin: CryptoDetail; quantity: number } }
   | { type: 'REMOVE_COIN'; payload: { coinId: string } }
   | { type: 'UPDATE_QUANTITY'; payload: { coinId: string; quantity: number } };
 
 interface PortfolioContextType {
   portfolio: PortfolioState;
-  addCoin: (coin: Cryptocurrency, quantity: number) => void;
+  addCoin: (coin: CryptoDetail, quantity: number) => void;
   removeCoin: (coinId: string) => void;
   updateQuantity: (coinId: string, quantity: number) => void;
   getTotalValue: () => number;
@@ -90,7 +90,7 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
     }
   }, [portfolio]);
   
-  const addCoin = (coin: Cryptocurrency, quantity: number) => {
+  const addCoin = (coin: CryptoDetail, quantity: number) => {
     dispatch({ type: 'ADD_COIN', payload: { coin, quantity } });
   };
   

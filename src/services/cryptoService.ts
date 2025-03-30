@@ -19,7 +19,6 @@ export interface Cryptocurrency {
   last_updated: string;
 }
 
-// Update this in src/services/cryptoService.ts
 export interface CryptoDetail extends Cryptocurrency {
   description: { en: string };
   total_volume?: number;
@@ -69,7 +68,7 @@ export const getTopCryptocurrencies = async (
 };
 
 // Get detailed info about a specific cryptocurrency
-export const getCryptoDetails = async (id: string, currency = 'usd'): Promise<CryptoDetail> => {
+export const getCryptoDetails = async (id: string): Promise<CryptoDetail> => {
   try {
     await new Promise(resolve => setTimeout(resolve, 1000));
 

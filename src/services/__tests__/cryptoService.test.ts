@@ -1,4 +1,3 @@
-// src/services/__tests__/cryptoService.test.ts
 import { getTopCryptocurrencies, getCryptoDetails } from '@/services/cryptoService';
 
 // Create a mock module for axios
@@ -13,8 +12,11 @@ jest.mock('axios', () => {
 });
 
 // Import the mocked module to access the mock instance
-import axios from 'axios';
-const { mockAxiosInstance } = axios as any;
+const { mockAxiosInstance } = jest.requireMock('axios') as {
+  mockAxiosInstance: {
+    get: jest.Mock;
+  };
+};
 
 describe('Crypto Service', () => {
   beforeEach(() => {

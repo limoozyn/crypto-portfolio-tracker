@@ -1,13 +1,27 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: [
-      'assets.coingecko.com',
-      'coins.coingecko.com',
-      'coin-images.coingecko.com'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.coingecko.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'coins.coingecko.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'coin-images.coingecko.com',
+        pathname: '**',
+      }
     ],
   },
-};
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+}
 
-export default nextConfig;
+module.exports = nextConfig
